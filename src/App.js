@@ -1,23 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import MyNotes from "./components/MyNotes";
+import Navbar from "./components/Navbar";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import NoteState from "./context/Notes/NoteState";
+import { Alert } from "./components/Alert";
+import Login from "./components/Login";
+import Signup from "./components/Signup";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <NoteState>
+        <BrowserRouter>
+          <Navbar title="iNotebook" mode="dark"></Navbar>
+          <Alert message="This is amazing React course" />
+          {/* <LoadingBar
+      color="#f11946"
+      height={3}
+      progress={this.state.progress}
+    /> */}
+          {
+            <Routes>
+              <Route exact path="/" element={<MyNotes key="mynotes" />} />
+              <Route exact path="/login" element={<Login key="login" />} />
+              <Route exact path="/signup" element={<Signup key="signup" />} />
+            </Routes>
+          }
+        </BrowserRouter>
+      </NoteState>
     </div>
   );
 }
