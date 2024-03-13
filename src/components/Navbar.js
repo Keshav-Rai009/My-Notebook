@@ -1,8 +1,13 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 
 const Navbar = (props) => {
+  const navigate = useNavigate();
+  const logoutUser = (e) => {
+    localStorage.removeItem("token");
+    navigate("/");
+  };
   return (
     <nav
       className={`navbar fixed-top navbar-expand-lg navbar-${props.mode} bg-${props.mode}`}
@@ -40,12 +45,29 @@ const Navbar = (props) => {
             <button className="btn btn-outline-success" type="submit">
               Search
             </button>
-            <Link className="btn btn-primary mx-2" to="/login" role="button">
-              Login
-            </Link>
-            <Link className="btn btn-primary" to="/signup" role="button">
-              Signup
-            </Link>
+            {localStorage.getItem("token") ? (
+              <Link
+                className="btn btn-primary mx-2"
+                to="/login"
+                role="button"
+                onClick={logoutUser}
+              >
+                Logout
+              </Link>
+            ) : (
+              <div className="d-flex">
+                <Link
+                  className="btn btn-primary mx-2"
+                  to="/login"
+                  role="button"
+                >
+                  Login
+                </Link>
+                <Link className="btn btn-primary" to="/signup" role="button">
+                  Signup
+                </Link>
+              </div>
+            )}
           </form>
         </div>
       </div>

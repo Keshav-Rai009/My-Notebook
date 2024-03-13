@@ -75,6 +75,7 @@ export default function Signup() {
             className="form-control"
             id="password"
             onChange={onChange}
+            minLength={5}
           />
         </div>
         <button type="submit" className="btn btn-primary" onClick={signUp}>

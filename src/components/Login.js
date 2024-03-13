@@ -21,6 +21,7 @@ export default function Login() {
       if (!res.success) alert("Invalid credentials");
       else {
         localStorage.setItem("token", res.jwtToken);
+        console.log(localStorage.getItem("token"));
         navigate("/");
       }
     } catch (error) {

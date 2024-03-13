@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import NoteContext from "./NoteContext";
 const HOST = "http://localhost:5000";
-const AUTH_TOKEN =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjVlOTU1MTRiMjljOTgxNDJjNzAyNzkyIn0sImlhdCI6MTcwOTc5MDQ5M30.wT3zeTrdP2GqQSoDGLSTmEFXq6PnRFHVDXY3lLk5z8Q";
+const AUTH_TOKEN = localStorage.getItem("token");
 const NoteState = (props) => {
   const [notes, setNotes] = useState([]);
 
@@ -12,7 +11,7 @@ const NoteState = (props) => {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          "auth-token": AUTH_TOKEN,
+          "auth-token": localStorage.getItem("token"),
           "Access-Control-Allow-Headers": true,
           "Access-Control-Allow-Methods": "POST",
         },
@@ -30,7 +29,7 @@ const NoteState = (props) => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "auth-token": AUTH_TOKEN,
+          "auth-token": localStorage.getItem("token"),
           "Access-Control-Allow-Headers": true,
         },
         body: JSON.stringify({ title, description, tag: tag || "personal" }),
@@ -49,7 +48,7 @@ const NoteState = (props) => {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          "auth-token": AUTH_TOKEN,
+          "auth-token": localStorage.getItem("token"),
           "Access-Control-Allow-Headers": true,
         },
         body: JSON.stringify({ title, description, tag }),
@@ -67,7 +66,7 @@ const NoteState = (props) => {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
-          "auth-token": AUTH_TOKEN,
+          "auth-token": localStorage.getItem("token"),
           "Access-Control-Allow-Headers": true,
         },
         // body: JSON.stringify({ title, description, tag: "personal" }),

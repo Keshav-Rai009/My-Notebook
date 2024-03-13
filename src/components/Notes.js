@@ -1,14 +1,17 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import NoteContext from "../context/Notes/NoteContext";
 import Note from "./Note";
 
 export default function Notes(props) {
+  const navigate = useNavigate();
   const noteContext = useContext(NoteContext);
   let { notes, getNotes, editNote } = noteContext;
   const [note, setNote] = useState({ etitle: "", edescription: "", etag: "" });
 
   useEffect(() => {
-    getNotes();
+    if (localStorage.getItem("token")) getNotes();
+    else navigate("/login");
   }, []);
 
   const updateNote = (editedNote) => {
